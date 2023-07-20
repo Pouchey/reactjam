@@ -7,6 +7,7 @@ export class Build extends Entity {
     super(id, baseHealth, 0, 0);
   }
 
+  //@ts-ignore
   public canGoTo(board: Board, currentPos: Pos, newPos: Pos): boolean {
     return false;
   }
