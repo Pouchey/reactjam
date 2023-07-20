@@ -8,16 +8,20 @@ const Board = () => {
   const game = useGameContext();
 
   return (
-    <div
-      className={styles.board}
-      style={{
-        gridTemplateColumns: `repeat(${getBoardSize(game)}, min-content)`,
-        gridTemplateRows: `repeat(${getBoardSize(game)}, min-content)`,
-      }}
-    >
-      {game.board.map((row, y) =>
-        row.map((_, x) => <div key={`${x}-${y}`} className={styles.cell}></div>)
-      )}
+    <div className={styles.wrapper}>
+      <div
+        className={styles.board}
+        style={{
+          gridTemplateColumns: `repeat(${getBoardSize(game)}, min-content)`,
+          gridTemplateRows: `repeat(${getBoardSize(game)}, min-content)`,
+        }}
+      >
+        {game.board.map((row, y) =>
+          row.map((_, x) => (
+            <div key={`${x}-${y}`} className={styles.cell}></div>
+          )),
+        )}
+      </div>
     </div>
   );
 };

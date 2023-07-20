@@ -6,8 +6,8 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (): GameState => {
     return {
-      board: createBoard(10),
-      boardSize: 10,
+      board: createBoard(15),
+      boardSize: 15,
       turn: 0,
     };
   },
