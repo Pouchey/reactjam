@@ -1,15 +1,12 @@
-import { createContext, useEffect, useState } from 'react';
-import Rune from './logic';
+import { useEffect, useState } from 'react';
 
-import { GameState } from './logic/types/game';
 import Board from './components/board';
-
-export const GameContext = createContext<GameState | undefined>(undefined);
+import { GameContext } from './hooks/useGameContext';
+import Rune from './logic';
+import { GameState } from './logic/types/game';
 
 const App = () => {
   const [game, setGame] = useState<GameState>();
-
-  // create context for game state
 
   useEffect(() => {
     Rune.initClient({

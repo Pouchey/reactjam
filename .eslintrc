@@ -24,12 +24,12 @@
         "allowConstantExport": true
       }
     ],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "overrides": [
-      {
-        "files": ["lib/*.ts"],
-        "extends": ["plugin:rune/logicModule"]
-      }
-    ]
-  }
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/logic/*.ts"],
+      "extends": ["plugin:rune/logicModule"]
+    }
+  ]
 }

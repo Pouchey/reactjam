@@ -1,4 +1,15 @@
 {
   "singleQuote": true,
-  "printWidth": 80
+  "printWidth": 80,
+  "importOrder": [
+    "^@assets/(.*)$",
+    "^@components/(.*)$",
+    "^@hooks/(.*)$",
+    "^@logic/(.*)$",
+    "^@styles/(.*)$",
+    "^@utils/(.*)$",
+    "^../(.*)$",
+    "^./(.*)$"
+  ],
+  "importOrderSeparation": true
 }

@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useGameContext } from '@hooks/useGameContext';
+
+import { getBoardSize } from '@logic/state';
+
 import styles from './style.module.scss';
-import { GameContext } from '../../App';
-import { getBoardSize } from '../../logic/state';
 
 const Board = () => {
-  const game = useContext(GameContext)!;
+  const game = useGameContext();
 
   return (
     <div
@@ -15,9 +16,7 @@ const Board = () => {
       }}
     >
       {game.board.map((row, y) =>
-        row.map((_, x) => (
-          <div key={`${x}-${y}`} className={styles.cell}></div>
-        )),
+        row.map((_, x) => <div key={`${x}-${y}`} className={styles.cell}></div>)
       )}
     </div>
   );

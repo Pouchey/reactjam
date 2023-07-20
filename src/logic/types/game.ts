@@ -10,4 +10,5 @@ export interface GameState {
   turn: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type GameActions = {};

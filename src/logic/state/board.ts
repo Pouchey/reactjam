@@ -1,7 +1,7 @@
 import { GameState } from '../types/game';
 
 export const createBoard = (size: number) =>
-  new Array(size).fill(0).map(() => new Array(size).fill(0));
+  Array.from({ length: size }, () => Array.from({ length: size }, () => 0));
 
 export const getBoard = (game: GameState) => {
   return game.board;
