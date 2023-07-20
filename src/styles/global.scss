@@ -1,0 +1,33 @@
+@import 'theme';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  line-height: 1.2;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  height: 100%;
+  color: $black;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  line-height: 18px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
