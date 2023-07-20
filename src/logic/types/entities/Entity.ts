@@ -1,11 +1,9 @@
 import { Board } from '../board/Board';
 import { Pos } from '../board/Pos';
 import { EntityState } from '../enums/EntityState';
-import { EntityType } from '../enums/EntityType';
 
 export class Entity {
   protected id: number;
-  protected type: EntityType | null;
   protected baseHealth: number;
   protected health: number;
   protected baseDomage: number;
@@ -20,8 +18,9 @@ export class Entity {
     movementSpeed: number,
     domage: number,
   ) {
+    if (baseHealth <= 0) throw new Error('Base health must be positive');
+
     this.id = id;
-    this.type = null;
     this.baseHealth = baseHealth;
     this.health = baseHealth;
     this.movementSpeed = movementSpeed;
@@ -31,35 +30,58 @@ export class Entity {
     this.domage = domage;
   }
 
+  /**
+   * Verify if the entity can go to a new position
+   * @param board - The board
+   * @param currentPos - The current position of the entity
+   * @param newPos - The new position of the entity
+   * @returns If the entity can go to the new position
+   */
   public canGoTo(board: Board, currentPos: Pos, newPos: Pos): boolean {
     const rowDiff = Math.abs(currentPos.row - newPos.row);
     const colDiff = Math.abs(currentPos.col - newPos.col);
 
     return (
       colDiff + rowDiff <= this.movementSpeed &&
-      board.cells[newPos.row][newPos.col].entity === null &&
+      board.getCell(newPos).isEmpty() === null &&
       newPos.row >= 0 &&
-      newPos.row < board.size &&
+      newPos.row < board.getSize() &&
       newPos.col >= 0 &&
-      newPos.col < board.size
+      newPos.col < board.getSize()
     );
   }
 
+  /**
+   * Give domages to this entity
+   * @param domage - The domage to take
+   */
   public takeDomages = (domage: number): void => {
     this.health -= domage;
     if (this.health <= 0) {
       this.state = EntityState.Dead;
-    } else {
-      if (this.health < this.baseHealth / 3) this.state = EntityState.week;
+    } else if (this.health < this.baseHealth / 3) this.state = EntityState.Week;
+  };
+
+  /**
+   * Give domages to this entity
+   * @param domage - The domage to take
+   */
+  public takeHeal = (heal: number): void => {
+    this.health += heal;
+    if (this.state === EntityState.Week && this.health >= this.baseHealth / 3) {
+      this.state = EntityState.Alive;
     }
   };
 
+  /**
+   * Move the entity to a new position
+   * @param board - The board
+   * @param currentPos - The current position of the entity
+   * @param newPos - The new position of the entity
+   */
   public move = (board: Board, currentPos: Pos, newPos: Pos): void => {
     if (this.canGoTo(board, currentPos, newPos)) {
-      board.cells[currentPos.row][currentPos.col].entity = null;
-      board.cells[newPos.row][newPos.col].entity = this;
-    } else {
-      throw new Error('Entity cannot move to this position');
-    }
+      board.moveEntity(currentPos, newPos);
+    } else throw new Error('Entity cannot move to this position');
   };
 }
