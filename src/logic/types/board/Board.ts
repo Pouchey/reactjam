@@ -13,12 +13,7 @@ export class Board {
    */
   constructor(size: number) {
     this.size = size;
-    this.cells = new Array(size);
-    for (let i = 0; i < this.size; i++) {
-      this.cells[i] = new Array(size);
-      for (let j = 0; j < this.size; i++) {
-        this.cells[i][j] = new Cell();
-      }
-    }
-  }
+    this.cells = 
+    Array.from({ length: size }, () => Array.from({ length: size }, () => new Cell()));
+}
 }
