@@ -16,8 +16,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rune-games-sdk": "^4.11.0",
-    "vite-plugin-rune": "^0.1.1"
+    "rune-games-sdk": "^4.11.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -34,6 +33,7 @@
     "stylelint": "^15.10.2",
     "stylelint-config-standard-scss": "^10.0.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0"
+    "vite": "^4.4.0",
+    "vite-plugin-rune": "^0.1.1"
   }
 }
