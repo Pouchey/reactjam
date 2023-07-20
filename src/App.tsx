@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { GameState } from './logic';
+import { GameState, getBoardSize } from './logic';
 import Rune from './logic';
+
+import styles from './App.module.scss';
 
 const App = () => {
   const [game, setGame] = useState<GameState>();
@@ -19,11 +21,18 @@ const App = () => {
 
   return (
     <>
-      <h1>Vite + Rune</h1>
-      <div className="card">
-        <button onClick={() => Rune.actions.increment({ amount: 1 })}>
-          count is {game.count}
-        </button>
+      <div
+        className={styles.board}
+        style={{
+          gridTemplateColumns: `repeat(${getBoardSize(game)}, min-content)`,
+          gridTemplateRows: `repeat(${getBoardSize(game)}, min-content)`,
+        }}
+      >
+        {game.board.map((row, y) =>
+          row.map((_, x) => (
+            <div key={`${x}-${y}`} className={styles.cell}></div>
+          )),
+        )}
       </div>
     </>
   );
