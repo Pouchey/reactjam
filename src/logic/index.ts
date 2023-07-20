@@ -1,27 +1,5 @@
-import { RuneClient } from 'rune-games-sdk/multiplayer';
-
-export interface GameState {
-  board: number[][];
-  boardSize: number;
-  turn: number;
-}
-
-type GameActions = {};
-
-declare global {
-  const Rune: RuneClient<GameState, GameActions>;
-}
-
-export const getBoard = (game: GameState) => {
-  return game.board;
-};
-
-export const getBoardSize = (game: GameState) => {
-  return game.boardSize;
-};
-
-export const createBoard = (size: number) =>
-  new Array(size).fill(0).map(() => new Array(size).fill(0));
+import { createBoard } from './state/board';
+import { GameState } from './types/game';
 
 Rune.initLogic({
   minPlayers: 1,
