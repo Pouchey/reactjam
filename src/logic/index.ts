@@ -36,3 +36,5 @@ Rune.initLogic({
     },
   },
 });
+
+export default Rune;

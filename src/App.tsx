@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react';
 import { GameState } from './logic';
+import Rune from './logic';
 
 const App = () => {
   const [game, setGame] = useState<GameState>();
 
   useEffect(() => {
-    console.log('initClient');
     Rune.initClient({
       onChange: ({ newGame }) => {
-        console.log('onChange', newGame);
         setGame(newGame);
-        console.log('newGame', newGame);
       },
     });
   }, []);
-
-  console.log('game', game);
 
   if (!game) {
     return <div>Loading...</div>;
