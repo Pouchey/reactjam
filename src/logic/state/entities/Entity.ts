@@ -1,6 +1,6 @@
 import { Board } from '../board/Board';
 import { Pos } from '../board/Pos';
-import { EntityState } from '../enums/EntityState';
+import { EntityState } from '../../types/enums/EntityState';
 
 export class Entity {
   protected id: number;
