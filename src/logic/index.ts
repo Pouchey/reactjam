@@ -1,4 +1,6 @@
 import { startGame } from './actions/game';
+import { playMeeting } from './actions/meeting';
+import { playRound } from './actions/round';
 import { MAX_PLAYERS, MIN_PLAYERS } from './config';
 import { initGame } from './config/game';
 import { addNewPlayer, removePlayer } from './events/playerJoined';
@@ -12,10 +14,10 @@ Rune.initLogic({
       startGame(game);
     },
     playRound: (action, { game, playerId }) => {
-      // Handle play Round
+      playRound(game, playerId, action);
     },
     playMeeting: (action, { game, playerId }) => {
-      // Handle play meeting
+      playMeeting(game, playerId, action);
     },
   },
   events: {
