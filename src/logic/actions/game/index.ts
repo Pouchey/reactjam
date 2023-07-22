@@ -2,11 +2,10 @@ import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 
-import { getRandomPlayerId } from '../player';
-
 export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
+  // TODO : Randomize players order
   initFirstRound(game);
 
   game.status = EGameStatus.PLAYING;
@@ -34,7 +33,7 @@ const initRoles = (game: TGameState) => {
 const initFirstRound = (game: TGameState) => {
   game.roundInfo = {
     startedAt: Rune.gameTimeInSeconds(),
-    currentPlayerId: getRandomPlayerId(game),
+    currentPlayerId: game.players[0].id,
     actionUsed: false,
     moveUsed: false,
   };

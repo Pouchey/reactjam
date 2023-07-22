@@ -1,28 +1,39 @@
-import { TGameState } from '_types/game';
+import Game from '_components/game';
+import Meeting from '_components/meeting';
+import Start from '_components/start';
+import UIWrapper from '_components/ui';
+import { TGameContext } from '_types/game/context';
+import { EGameStatus } from '_types/game/enum';
 import { useEffect, useState } from 'react';
 
-import Board from './components/board';
 import { GameContext } from './hooks/useGameContext';
 import Rune from './logic';
 
 const App = () => {
-  const [game, setGame] = useState<TGameState>();
+  const [gameContext, setGameContext] = useState<TGameContext>();
 
   useEffect(() => {
     Rune.initClient({
-      onChange: ({ newGame }) => {
-        setGame(newGame);
+      onChange: ({ newGame, players }) => {
+        setGameContext({
+          game: newGame,
+          players,
+        });
       },
     });
   }, []);
 
-  if (!game) {
+  if (!gameContext) {
     return <div>Loading...</div>;
   }
 
   return (
-    <GameContext.Provider value={game}>
-      <Board />
+    <GameContext.Provider value={gameContext}>
+      <UIWrapper>
+        {gameContext.game.status === EGameStatus.WAITING && <Start />}
+        {gameContext.game.status === EGameStatus.PLAYING && <Game />}
+        {gameContext.game.status === EGameStatus.MEETING && <Meeting />}
+      </UIWrapper>
     </GameContext.Provider>
   );
 };
