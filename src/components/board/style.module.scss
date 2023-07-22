@@ -1,16 +1,12 @@
-.wrapper{
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-}
+
 
 .board{
   display: grid;
-  transform:translateX(150%) rotateX(60deg) rotateZ(45deg);
+  width: 100vw;
+  height: 100vh;
+
 }
 
 .cell{
   border: 1px solid black;
-  width: 128px;
-  height: 128px;
 }

@@ -20,14 +20,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@logic/*": ["./src/logic/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"]
+      "_assets/*": ["./src/assets/*"],
+      "_components/*": ["./src/components/*"],
+      "_hooks/*": ["./src/hooks/*"],
+      "_logic/*": ["./src/logic/*"],
+      "_styles/*": ["./src/styles/*"],
+      "_types/*": ["./src/types/*"],
+      "_utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

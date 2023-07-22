@@ -1,31 +1,24 @@
-import { cols, maxPlayers, minPlayers, rows } from './config';
-import { createBoard } from './board';
-import { GameState } from '../type/GameState';
+import { startGame } from './actions/game';
+import { selectRole } from './actions/player';
+import { MAX_PLAYERS, MIN_PLAYERS } from './config';
+import { initGame } from './config/game';
 
 Rune.initLogic({
-  minPlayers: 1,
-  maxPlayers: 4,
-  setup: (): GameState => {
-    return {
-      board: createBoard(cols, rows),
-      cols: cols,
-      rows: rows,
-      players: [],
-      gameConfig: {
-        maxPlayers: maxPlayers,
-        minPlayers: minPlayers
-      },
-      boardSize: cols * rows,
-      turn: 0,
-    };
-  },
-  actions: {},
-  events: {
-    playerJoined: () => {
-      // Handle player joined
+  minPlayers: MIN_PLAYERS,
+  maxPlayers: MAX_PLAYERS,
+  setup: initGame,
+  actions: {
+    startGame: (_, { game }) => {
+      startGame(game);
     },
-    playerLeft() {
-      // Handle player left
+    selectRole: (role, { game, playerId }) => {
+      selectRole(game, playerId, role);
+    },
+    playTurn: (action, { game, playerId }) => {
+      // Handle play turn
+    },
+    playMeeting: (action, { game, playerId }) => {
+      // Handle play meeting
     },
   },
 });

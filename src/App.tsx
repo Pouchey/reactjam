@@ -1,12 +1,12 @@
+import { TGameState } from '_types/game';
 import { useEffect, useState } from 'react';
 
 import Board from './components/board';
 import { GameContext } from './hooks/useGameContext';
 import Rune from './logic';
-import { GameState } from './type/GameState';
 
 const App = () => {
-  const [game, setGame] = useState<GameState>();
+  const [game, setGame] = useState<TGameState>();
 
   useEffect(() => {
     Rune.initClient({

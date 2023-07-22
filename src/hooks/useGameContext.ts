@@ -1,7 +1,7 @@
+import { TGameState } from '_types/game';
 import { createContext, useContext } from 'react';
-import { GameState } from '../type/GameState';
 
-export const GameContext = createContext<GameState | undefined>(undefined);
+export const GameContext = createContext<TGameState | undefined>(undefined);
 
 export const GameProvider = GameContext.Provider;
 
