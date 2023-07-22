@@ -30,8 +30,12 @@ const initRoles = (game: TGameState) => {
 };
 
 const initFirstRound = (game: TGameState) => {
-  game.roundStartedAt = Rune.gameTimeInSeconds();
-  game.currentPlayerId = getRandomPlayerId(game);
+  game.roundInfo = {
+    startedAt: Rune.gameTimeInSeconds(),
+    currentPlayerId: getRandomPlayerId(game),
+    actionUsed: false,
+    moveUsed: false,
+  };
 };
 
 const getRandomPlayerId = (game: TGameState) => {

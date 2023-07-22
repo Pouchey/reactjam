@@ -15,13 +15,17 @@ export type TGameState = {
   status: EGameStatus;
   board: TCell[][];
   players: TPlayer[];
-  currentPlayerId: string | null;
-  roundStartedAt: number;
+  roundInfo?: {
+    currentPlayerId: string | null;
+    startedAt: number;
+    actionUsed: boolean;
+    moveUsed: boolean;
+  };
 };
 
 export type TGameActions = {
   startGame: () => void;
-  playTurn: (action: any) => void;
+  playRound: (action: any) => void;
   playMeeting: (action: any) => void;
 };
 

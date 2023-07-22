@@ -12,7 +12,5 @@ export const initGame = (): TGameState => {
     status: EGameStatus.WAITING,
     board: createBoard(COLS_SIZE, ROWS_SIZE),
     players: [],
-    currentPlayerId: null,
-    roundStartedAt: 0,
   };
 };
