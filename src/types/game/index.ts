@@ -15,7 +15,7 @@ export type TGameState = {
   status: TGameStatus;
   board: TCell[][];
   players: TPlayer[];
-  lastPlayerId: number;
+  currentPlayerId: string | null;
   roundStartedAt: number;
 };
 
