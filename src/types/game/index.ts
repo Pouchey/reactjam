@@ -16,6 +16,7 @@ export type TGameState = {
   board: TCell[][];
   players: TPlayer[];
   lastPlayerId: number;
+  roundStartedAt: number;
 };
 
 export type TGameActions = {

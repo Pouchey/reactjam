@@ -1,3 +1,4 @@
+import { createPlayer } from '_logic/config/player';
 import { TGameState } from '_types/game';
 
 export const selectRole = (
@@ -5,8 +6,5 @@ export const selectRole = (
   playerId: string,
   role: string
 ) => {
-  game.players.push({
-    id: playerId,
-    role,
-  });
+  game.players.push(createPlayer(playerId, role));
 };
