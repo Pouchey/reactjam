@@ -1,6 +1,5 @@
 import { createContext, useContext } from 'react';
-
-import { GameState } from '../logic/types/game';
+import { GameState } from '../type/GameState';
 
 export const GameContext = createContext<GameState | undefined>(undefined);
 

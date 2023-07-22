@@ -1,8 +1,6 @@
 import { useGameContext } from '@hooks/useGameContext';
-
-import { getBoardSize } from '@logic/state';
-
 import styles from './style.module.scss';
+import { getColsBoardSize, getRowsBoardSize } from '@logic/board';
 
 const Board = () => {
   const game = useGameContext();
@@ -12,8 +10,8 @@ const Board = () => {
       <div
         className={styles.board}
         style={{
-          gridTemplateColumns: `repeat(${getBoardSize(game)}, min-content)`,
-          gridTemplateRows: `repeat(${getBoardSize(game)}, min-content)`,
+          gridTemplateColumns: `repeat(${getColsBoardSize(game)}, min-content)`,
+          gridTemplateRows: `repeat(${getRowsBoardSize(game)}, min-content)`,
         }}
       >
         {game.board.map((row, y) =>
