@@ -1,3 +1,4 @@
+import { TPos } from '_types/pos';
 import { EPlayerRole, EPlayerStatus } from './enum';
 
 export type TPlayer = {
@@ -5,4 +6,5 @@ export type TPlayer = {
   status: EPlayerStatus;
   role?: EPlayerRole;
   isBot?: boolean;
+  currentPos?: TPos;
 };
