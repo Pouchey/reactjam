@@ -1,8 +1,8 @@
-import { ERole } from "_types/enum/ERole";
-import { EStatutPlayer } from "_types/enum/EStatutPlayer";
+import { EPlayerRole, EPlayerStatus } from './enum';
 
 export type TPlayer = {
   id: string;
-  status: EStatutPlayer;
-  role?: ERole;
+  status: EPlayerStatus;
+  role?: EPlayerRole;
+  isBot?: boolean;
 };

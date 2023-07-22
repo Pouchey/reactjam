@@ -3,16 +3,16 @@ import { RuneClient } from 'rune-games-sdk/multiplayer';
 
 import { TPlayer } from '../player';
 
+import { EGameStatus } from './enum';
+
 export type IGameConfig = {
   minPlayers: number;
   maxPlayers: number;
 };
 
-export type TGameStatus = 'WAITING' | 'PLAYING' | 'MEETING' | 'FINISHED';
-
 export type TGameState = {
   config: IGameConfig;
-  status: TGameStatus;
+  status: EGameStatus;
   board: TCell[][];
   players: TPlayer[];
   currentPlayerId: string | null;
