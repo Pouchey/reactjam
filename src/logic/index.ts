@@ -1,7 +1,7 @@
 import { startGame } from './actions/game';
-import { selectRole } from './actions/player';
 import { MAX_PLAYERS, MIN_PLAYERS } from './config';
 import { initGame } from './config/game';
+import { addNewPlayer, removePlayer } from './events/playerJoined';
 
 Rune.initLogic({
   minPlayers: MIN_PLAYERS,
@@ -11,14 +11,19 @@ Rune.initLogic({
     startGame: (_, { game }) => {
       startGame(game);
     },
-    selectRole: (role, { game, playerId }) => {
-      selectRole(game, playerId, role);
-    },
     playTurn: (action, { game, playerId }) => {
       // Handle play turn
     },
     playMeeting: (action, { game, playerId }) => {
       // Handle play meeting
+    },
+  },
+  events: {
+    playerJoined: (playerId, { game }) => {
+      addNewPlayer(game, playerId);
+    },
+    playerLeft: (playerId, { game }) => {
+      removePlayer(game, playerId);
     },
   },
 });

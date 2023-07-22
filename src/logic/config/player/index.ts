@@ -1,9 +1,8 @@
 import { TPlayer } from '_types/player';
 
-export const createPlayer = (id: string, role: string): TPlayer => {
+export const createPlayer = (id: string): TPlayer => {
   return {
     id,
-    status: 'ALIVE',
-    role: 'crewmate',
+    status: 'IDLE',
   };
 };

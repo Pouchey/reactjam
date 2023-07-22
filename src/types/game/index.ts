@@ -21,7 +21,6 @@ export type TGameState = {
 
 export type TGameActions = {
   startGame: () => void;
-  selectRole: (role: string) => void;
   playTurn: (action: any) => void;
   playMeeting: (action: any) => void;
 };
