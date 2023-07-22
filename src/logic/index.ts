@@ -11,8 +11,8 @@ Rune.initLogic({
     startGame: (_, { game }) => {
       startGame(game);
     },
-    playTurn: (action, { game, playerId }) => {
-      // Handle play turn
+    playRound: (action, { game, playerId }) => {
+      // Handle play Round
     },
     playMeeting: (action, { game, playerId }) => {
       // Handle play meeting
