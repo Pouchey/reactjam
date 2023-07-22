@@ -4,7 +4,7 @@ import { COLS_SIZE, ROWS_SIZE } from '_logic/config';
 import styles from './style.module.scss';
 
 const Board = () => {
-  const game = useGameContext();
+  const gameContext = useGameContext();
 
   return (
     <div
@@ -14,10 +14,10 @@ const Board = () => {
         gridTemplateRows: `repeat(${ROWS_SIZE}, 1fr)`,
       }}
     >
-      {game.board.map((row, y) =>
+      {gameContext.game.board.map((row, y) =>
         row.map((_, x) => (
           <div key={`${x}-${y}`} className={styles.cell}>
-            {game.board[y][x].id}
+            {gameContext.game.board[y][x].id}
           </div>
         ))
       )}
