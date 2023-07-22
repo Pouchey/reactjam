@@ -1,4 +1,5 @@
 import { TCell } from '_types/cell';
+import { TRoundAction } from '_types/round';
 import { RuneClient } from 'rune-games-sdk/multiplayer';
 
 import { TPlayer } from '../player';
@@ -25,7 +26,7 @@ export type TGameState = {
 
 export type TGameActions = {
   startGame: () => void;
-  playRound: (action: any) => void;
+  playRound: (action: TRoundAction) => void;
   playMeeting: (action: any) => void;
 };
 
