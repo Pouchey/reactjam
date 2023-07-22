@@ -2,6 +2,8 @@ import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 
+import { getRandomPlayerId } from '../player';
+
 export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
@@ -36,12 +38,4 @@ const initFirstRound = (game: TGameState) => {
     actionUsed: false,
     moveUsed: false,
   };
-};
-
-const getRandomPlayerId = (game: TGameState) => {
-  const alivePlayers = game.players.filter(
-    (player) => player.status === EPlayerStatus.ALIVE
-  );
-  const randomIndex = Math.floor(Math.random() * alivePlayers.length);
-  return alivePlayers[randomIndex].id;
 };
