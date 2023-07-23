@@ -16,6 +16,14 @@ const initPosition = (game: TGameState) => {
   let end = false;
   let tabPlayer = [...game.players];
 
+  // IDEE POUR OPTIMISER : On pourrait itérer sur les joueurs et leur donner une position aléatoire
+  // Si la position est déjà prise, on reprend une position aléatoire
+  // Permettrait de ne pas avoir à itérer sur toutes les cases du plateau
+  // Permettrait de ne pas faire d'opérations de tableaux supplémentaires
+
+  // REMARQUE : Position en 2D pour le joueur mais le plateau est en 1D
+  // Il faudrait harmoniser les deux
+
   while (!end) {
     game.board.forEach((row, i) =>
       row.forEach((cell, j) => {
@@ -23,7 +31,9 @@ const initPosition = (game: TGameState) => {
           cell.hasPlayer = true;
           cell.playerId = tabPlayer.pop()?.id;
 
-          const playerToUpdate = game.players.find(player => player.id === cell.playerId);
+          const playerToUpdate = game.players.find(
+            (player) => player.id === cell.playerId
+          );
           if (playerToUpdate) {
             playerToUpdate.currentPos = { col: j, row: i };
           }
@@ -33,7 +43,6 @@ const initPosition = (game: TGameState) => {
     end = tabPlayer.length === 0;
   }
 };
-
 
 const initBots = (game: TGameState) => {
   const nbBots = 7 - game.players.length;
@@ -62,5 +71,3 @@ const initFirstRound = (game: TGameState) => {
     moveUsed: false,
   };
 };
-
-

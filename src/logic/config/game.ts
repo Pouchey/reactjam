@@ -1,5 +1,5 @@
 import { COLS_SIZE, MAX_PLAYERS, MIN_PLAYERS, ROWS_SIZE } from '_logic/config';
-import { createBoard } from '_logic/state/board';
+import { createBoard } from '_logic/config/board';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 

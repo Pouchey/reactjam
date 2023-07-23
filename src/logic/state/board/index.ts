@@ -1,4 +1,5 @@
-import { createBoard } from './init';
-import { getBoard } from './selectors';
+import { TGameState } from '_types/game';
 
-export { createBoard, getBoard };
+export const getBoard = (game: TGameState) => {
+  return game.board;
+};

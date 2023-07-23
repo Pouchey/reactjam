@@ -18,13 +18,13 @@ export type TPayloadActionFlic = {
 
 export type TRoundAction =
   | {
-    type: ERoundActionType.MOVE;
-    payload: TPayloadMoveNeighbour | TPayloadMoveFlic;
-  }
+      type: ERoundActionType.MOVE;
+      payload: TPayloadMoveNeighbour | TPayloadMoveFlic;
+    }
   | {
-    type: ERoundActionType.ACTION;
-    payload: TPayloadActionNeighbour | TPayloadActionFlic;
-  }
+      type: ERoundActionType.ACTION;
+      payload: TPayloadActionNeighbour | TPayloadActionFlic;
+    }
   | {
-    type: ERoundActionType.PASSE
-  };
+      type: ERoundActionType.SKIP;
+    };
