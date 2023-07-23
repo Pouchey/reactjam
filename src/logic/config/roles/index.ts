@@ -10,7 +10,6 @@ const getInfoRole = (role: EPlayerRole): TInfoRole => {
       return {};
     case EPlayerRole.COP:
       return {};
-
     case EPlayerRole.CURIOUS:
       return {};
     case EPlayerRole.GOSSIP:
@@ -31,7 +30,9 @@ const getInfoRole = (role: EPlayerRole): TInfoRole => {
 export const initInfoRole = (game: TGameState) => {
   const murderPlayer = Math.floor(Math.random() * GLOBAL_PLAYERS);
   const roleArray = shuffleArray<EPlayerRole>(
-    Object.values(EPlayerRole).filter((r) => r != EPlayerRole.MURDER)
+    Object.values(EPlayerRole).filter(
+      (r): r is EPlayerRole => r !== EPlayerRole.MURDER
+    )
   );
   game.players.forEach((player, i) => {
     const roleNumber = Math.floor(Math.random() * GLOBAL_PLAYERS);
