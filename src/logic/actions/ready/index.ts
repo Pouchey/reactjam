@@ -7,6 +7,5 @@ export const setReady = (action: any, game: TGameState, playerId: string) => {
         player.ready = true
     } else {
         throw new Error("player not exist");
-
     }
 }

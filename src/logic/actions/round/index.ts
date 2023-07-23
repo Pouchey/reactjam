@@ -5,7 +5,7 @@ import { moveToCell } from './move';
 import { TPlayer } from '_types/player';
 import { EGameStatus } from '_types/game/enum';
 import { playAction } from './action';
-import { getPlayerAlive } from '../player';
+import { getPlayerAlive } from '_logic/state/player';
 
 
 const nextPlayer = (game: TGameState, prevPlayer: TPlayer) => {

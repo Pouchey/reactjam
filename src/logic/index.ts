@@ -6,8 +6,8 @@ import { getPossibleLocation } from './actions/round/move';
 import { MAX_PLAYERS, MIN_PLAYERS } from './config';
 import { initGame } from './config/game';
 import { addNewPlayer, removePlayer } from './events/playerJoined';
-import { setReady } from './actions/round/ready';
-import { arrestedPlayer, getPlayerAlive } from './actions/player';
+import { setReady } from './actions/ready';
+import { arrestedPlayer, getPlayerAlive } from './state/player';
 
 Rune.initLogic({
   minPlayers: MIN_PLAYERS,

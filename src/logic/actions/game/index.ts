@@ -1,12 +1,12 @@
 import { GLOBAL_PLAYERS } from '_logic/config';
 import { initRoles } from '_logic/config/roles';
+import { clearBoard } from '_logic/state/board';
+import { getPlayerAlive, randomizePlayer, refreshPlayer } from '_logic/state/player';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
-import { TPlayer } from '_types/player';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 import { TPos } from '_types/pos';
-import { randomizePosition, shuffleArray } from '_utils/index';
-import { getPlayerAlive } from '../player';
+import { randomizePosition } from '_utils/index';
 
 export const startGame = (game: TGameState) => {
   initBots(game);
@@ -23,21 +23,6 @@ export const endRound = (game: TGameState) => {
   refreshPlayer(game);
   gameOver(game);
 }
-
-const refreshPlayer = (game: TGameState) => {
-  const playerAlive = getPlayerAlive(game)
-  playerAlive.forEach(player => {
-    if (!player.isBot) {
-      player.ready = false;
-      player.vote = 0;
-      player.voteUse = false;
-    }
-  })
-}
-
-const randomizePlayer = (game: TGameState) => {
-  game.players = shuffleArray<TPlayer>(game.players);
-};
 
 const initPosition = (game: TGameState) => {
   game.players.forEach((player) => {
@@ -76,7 +61,7 @@ const initFirstRound = (game: TGameState) => {
   };
 };
 
-function gameOver(game: TGameState) {
+const gameOver = (game: TGameState) => {
   const playerAlive = getPlayerAlive(game);
   if (playerAlive.length == 2) {
     const murder = playerAlive.find(player => player.infoRole.role === EPlayerRole.MURDER)
@@ -105,16 +90,4 @@ function gameOver(game: TGameState) {
   }
 };
 
-function clearBoard(game: TGameState) {
-  game.players.forEach(player => {
-    if (player.status !== EPlayerStatus.ALIVE && player.currentPos !== undefined) {
-      game.board[player.currentPos.row][player.currentPos.col].hasPlayer = false;
-      game.board[player.currentPos.row][player.currentPos.col].playerId = undefined;
-
-      player.currentPos = undefined;
-      player.vote = 0;
-      player.ready = true;
-    }
-  })
-};
 
