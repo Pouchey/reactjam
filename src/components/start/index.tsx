@@ -11,12 +11,12 @@ const Roles = () => {
   };
 
   return (
-    <div>
+    <div className={styles.start}>
       <h1>Waiting for players</h1>
       <h2>Players: {Object.keys(gameContext.players).length}</h2>
-      <div>
+      <div className={styles.playerslist}>
         {Object.values(gameContext.players).map((player) => (
-          <div key={player.playerId}>
+          <div key={player.playerId} className={styles.player}>
             <img src={player.avatarUrl} alt={player.displayName} />
             <p>{player.displayName}</p>
           </div>

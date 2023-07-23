@@ -1,6 +1,8 @@
+import { COLS_SIZE, ROWS_SIZE } from '_logic/config';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
+import { TPos } from '_types/pos';
 
 export const startGame = (game: TGameState) => {
   initBots(game);
@@ -12,36 +14,26 @@ export const startGame = (game: TGameState) => {
   game.status = EGameStatus.PLAYING;
 };
 
+export function RandomizePosition(): TPos {
+  return {
+    col: Math.floor(Math.random() * COLS_SIZE),
+    row: Math.floor(Math.random() * ROWS_SIZE),
+  };
+}
+
 const initPosition = (game: TGameState) => {
-  let end = false;
-  const tabPlayer = [...game.players];
-
-  // IDEE POUR OPTIMISER : On pourrait itérer sur les joueurs et leur donner une position aléatoire
-  // Si la position est déjà prise, on reprend une position aléatoire
-  // Permettrait de ne pas avoir à itérer sur toutes les cases du plateau
-  // Permettrait de ne pas faire d'opérations de tableaux supplémentaires
-
   // REMARQUE : Position en 2D pour le joueur mais le plateau est en 1D
   // Il faudrait harmoniser les deux
 
-  while (!end) {
-    game.board.forEach((row, i) =>
-      row.forEach((cell, j) => {
-        if (!cell.hasPlayer && Math.floor(Math.random() * 100) < 50 && !end) {
-          cell.hasPlayer = true;
-          cell.playerId = tabPlayer.pop()?.id;
-
-          const playerToUpdate = game.players.find(
-            (player) => player.id === cell.playerId
-          );
-          if (playerToUpdate) {
-            playerToUpdate.currentPos = { col: j, row: i };
-          }
-        }
-      })
-    );
-    end = tabPlayer.length === 0;
-  }
+  game.players.forEach((player) => {
+    let pos: TPos = RandomizePosition();
+    while (game.board[pos.row][pos.col].hasPlayer) {
+      pos = RandomizePosition();
+    }
+    game.board[pos.row][pos.col].hasPlayer = true;
+    game.board[pos.row][pos.col].playerId = player.id;
+    player.currentPos = pos;
+  });
 };
 
 const initBots = (game: TGameState) => {
