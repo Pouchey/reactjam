@@ -1,3 +1,4 @@
+import { TCell } from '_types/cell';
 import { TGameState } from '_types/game';
 import { TPlayer } from '_types/player';
 import { EPlayerRole } from '_types/player/enum';
@@ -100,6 +101,18 @@ const moveDiagonal = (game: TGameState, player: TPlayer): TPos[] => {
   return pos;
 };
 
+const moveLover = (game: TGameState, player: TPlayer): TPos[] => {
+  if (player.infoRole.loverId !== undefined) {
+    const playerLover: TPlayer | undefined = game.players.find(
+      (player) => player.id === player.infoRole.loverId
+    );
+    if (playerLover !== undefined) return moveAllDirection(game, playerLover);
+    else throw new Error('player lover not found');
+  } else {
+    return moveAllDirection(game, player);
+  }
+};
+
 export const getPossibleLocation = (
   game: TGameState,
   playerId: string,
@@ -117,19 +130,33 @@ export const getPossibleLocation = (
       case EPlayerRole.CURIOUS:
         return moveDiagonal(game, player);
       case EPlayerRole.GOSSIP:
-        return [];
+        return move2D(game, player);
       case EPlayerRole.LITTLE_GIRL:
-        return [];
+        return moveAllDirection(game, player);
       case EPlayerRole.LOVER:
-        return [];
+        return moveLover(game, player);
       case EPlayerRole.NEIGHBOR:
-        return [];
+        return moveAllDirection(game, player);
       case EPlayerRole.OVERSEER:
-        return [];
+        return moveDiagonal(game, player);
       default:
         throw new Error('ROLE undefine');
     }
   else {
     throw new Error('player not exist');
   }
+};
+
+export const moveToCell = (game: TGameState, player: TPlayer, newPos: TPos) => {
+  if (verifCell(game, newPos)) {
+    if (player.currentPos !== undefined) {
+      const oldCell: TCell =
+        game.board[player.currentPos?.row][player.currentPos?.col];
+      const newCell: TCell = game.board[newPos.row][newPos.col];
+      oldCell.hasPlayer = false;
+      oldCell.playerId = undefined;
+      newCell.hasPlayer = true;
+      newCell.playerId = player.id;
+    }
+  } else throw new Error('new position not valid');
 };

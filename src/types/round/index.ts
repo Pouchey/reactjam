@@ -1,3 +1,4 @@
+import { TPos } from '_types/pos';
 import { ERoundActionType } from './enum';
 
 export type TPayloadMoveNeighbour = {
@@ -18,13 +19,13 @@ export type TPayloadActionFlic = {
 
 export type TRoundAction =
   | {
-      type: ERoundActionType.MOVE;
-      payload: TPayloadMoveNeighbour | TPayloadMoveFlic;
-    }
+    type: ERoundActionType.MOVE;
+    newPos: TPos;
+  }
   | {
-      type: ERoundActionType.ACTION;
-      payload: TPayloadActionNeighbour | TPayloadActionFlic;
-    }
+    type: ERoundActionType.ACTION;
+    payload: TPayloadActionNeighbour | TPayloadActionFlic;
+  }
   | {
-      type: ERoundActionType.SKIP;
-    };
+    type: ERoundActionType.SKIP;
+  };
