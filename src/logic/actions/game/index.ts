@@ -1,5 +1,5 @@
 import { COLS_SIZE, GLOBAL_PLAYERS, ROWS_SIZE } from '_logic/config';
-import { initInfoRole } from '_logic/config/roles';
+import { initRoles } from '_logic/config/roles';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 import { TPlayer } from '_types/player';
@@ -10,7 +10,6 @@ import { shuffleArray } from '_utils/index';
 export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
-  initInfoRole(game);
   initPosition(game);
   randomizePlayer(game);
   initFirstRound(game);
@@ -52,13 +51,6 @@ const initBots = (game: TGameState) => {
       infoRole: {},
     });
   }
-};
-
-const initRoles = (game: TGameState) => {
-  game.players.forEach((player) => {
-    player.infoRole.role = EPlayerRole.NEIGHBOR;
-    player.status = EPlayerStatus.ALIVE;
-  });
 };
 
 const initFirstRound = (game: TGameState) => {

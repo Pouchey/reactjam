@@ -1,10 +1,12 @@
 import { TGameState } from "_types/game";
-import { EPlayerRole } from "_types/player/enum";
+import { EPlayerRole, EPlayerStatus } from "_types/player/enum";
 import { GLOBAL_PLAYERS } from "..";
 import { TInfoRole } from "_types/player";
 import { shuffleArray } from "_utils/index";
 
 const getInfoRole = (role: EPlayerRole): TInfoRole => {
+    console.log(role);
+
     switch (role) {
         case EPlayerRole.MURDER:
             return {};
@@ -27,7 +29,7 @@ const getInfoRole = (role: EPlayerRole): TInfoRole => {
     }
 };
 
-export const initInfoRole = (game: TGameState) => {
+export const initRoles = (game: TGameState) => {
     const murderPlayer = Math.floor(Math.random() * GLOBAL_PLAYERS);
     const roleArray = shuffleArray<EPlayerRole>(
         Object.values(EPlayerRole).filter(
@@ -35,6 +37,7 @@ export const initInfoRole = (game: TGameState) => {
         )
     );
     game.players.forEach((player, i) => {
+        player.status = EPlayerStatus.ALIVE;
         const roleNumber = Math.floor(Math.random() * GLOBAL_PLAYERS);
         if (i === murderPlayer) {
             player.infoRole = getInfoRole(EPlayerRole.MURDER);

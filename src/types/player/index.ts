@@ -7,6 +7,8 @@ export type TInfoRole = {
   actionIsPassif?: boolean;
   actionCount?: number;
   loverId?: string;
+  trueDescription?: String;
+  falseDescription?: String;
 };
 
 export type TPlayer = {
