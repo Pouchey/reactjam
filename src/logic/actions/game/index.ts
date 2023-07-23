@@ -8,6 +8,7 @@ export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
   initPosition(game);
+  // TODO : create a function to init the random roles
   game.players = shuffleArray(game.players);
   initFirstRound(game);
 
@@ -44,7 +45,7 @@ const initBots = (game: TGameState) => {
       id: `Bot ${i}`,
       status: EPlayerStatus.ALIVE,
       isBot: true,
-      infoRole: {}
+      infoRole: {},
     });
   }
 };
