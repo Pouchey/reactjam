@@ -15,7 +15,7 @@ Rune.initLogic({
       startGame(game);
     },
     getPossibleLocation: (action, { game, playerId }) => {
-      return getPossibleLocation(game, playerId, action);
+      getPossibleLocation(game, playerId, action);
     },
     playRound: (action, { game, playerId }) => {
       playRound(game, playerId, action);

@@ -1,8 +1,10 @@
 import { COLS_SIZE, GLOBAL_PLAYERS, ROWS_SIZE } from '_logic/config';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
+import { TPlayer } from '_types/player';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 import { TPos } from '_types/pos';
+import { shuffleArray } from '_utils/index';
 
 export const startGame = (game: TGameState) => {
   initBots(game);
@@ -15,20 +17,17 @@ export const startGame = (game: TGameState) => {
 };
 
 const randomizePlayer = (game: TGameState) => {
-  game.players = shuffleArray(game.players);
-}
+  game.players = shuffleArray<TPlayer>(game.players);
+};
 
 const randomizePosition = (): TPos => {
   return {
     col: Math.floor(Math.random() * COLS_SIZE),
     row: Math.floor(Math.random() * ROWS_SIZE),
   };
-}
+};
 
 const initPosition = (game: TGameState) => {
-  // REMARQUE : Position en 2D pour le joueur mais le plateau est en 1D
-  // Il faudrait harmoniser les deux
-
   game.players.forEach((player) => {
     let pos: TPos = randomizePosition();
     while (game.board[pos.row][pos.col].hasPlayer) {
