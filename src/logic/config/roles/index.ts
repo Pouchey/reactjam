@@ -38,7 +38,7 @@ export const initRoles = (game: TGameState) => {
     );
     game.players.forEach((player, i) => {
         player.status = EPlayerStatus.ALIVE;
-        const roleNumber = Math.floor(Math.random() * GLOBAL_PLAYERS);
+        const roleNumber = Math.floor(Math.random() * roleArray.length);
         if (i === murderPlayer) {
             player.infoRole = getInfoRole(EPlayerRole.MURDER);
         } else {
