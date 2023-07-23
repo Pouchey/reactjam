@@ -1,5 +1,6 @@
 import { TPos } from '_types/pos';
 import { ERoundActionType } from './enum';
+import { EPlayerRole } from '_types/player/enum';
 
 export type TPayloadMoveNeighbour = {
   cellId: number;
@@ -16,6 +17,10 @@ export type TPayloadActionNeighbour = {
 export type TPayloadActionFlic = {
   cellId: number;
 };
+
+export type TGestionRole = {
+  roles: EPlayerRole[]
+}
 
 export type TRoundAction =
   | {

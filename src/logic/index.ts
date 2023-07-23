@@ -17,6 +17,10 @@ Rune.initLogic({
     startGame: (_, { game }) => {
       startGame(game);
     },
+    //permet de régler les roles avant le debut de partie il existe une liste par default
+    setRoles: (action, { game }) => {
+      game.roleInGame = action.roles
+    },
     getPossibleLocation: (action, { game, playerId }) => {
       getPossibleLocation(game, playerId, action);
     },
