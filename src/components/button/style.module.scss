@@ -1,12 +1,14 @@
+@import '_styles/theme';
+
 .button{
   width: 100%;
   padding:8px 24px; 
-  background: tomato;
-  border: 1px solid red;
+  background: $red63;
+  border: 1px solid $red50;
   border-radius: 12px;
-  color:white;
+  color: $yellow83;
   font-size: 1.5rem;
-  box-shadow: inset 0 -0.2em 0 red;
+  box-shadow: inset 0 -0.2em 0 $red50;
   transition: 0.3s;
   transition-timing-function: all cubic-bezier(.4,0,.2,1);
   cursor: pointer;
@@ -19,7 +21,7 @@
   }
   
   &:hover{
-    box-shadow: inset 0 -8px 0 red;
+    box-shadow: inset 0 -8px 0 $red50;
   
     > span{
       top: -4px;
