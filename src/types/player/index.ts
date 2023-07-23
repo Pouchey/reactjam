@@ -5,7 +5,7 @@ import { EPlayerRole, EPlayerStatus } from './enum';
 
 export type TInfoRole = {
   role?: EPlayerRole;
-  isPassif?: boolean;
+  actionIsPassif?: boolean;
   actionCount?: number;
 }
 

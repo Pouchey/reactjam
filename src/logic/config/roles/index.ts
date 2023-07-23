@@ -44,7 +44,6 @@ function getInfoRole(role: EPlayerRole): TInfoRole {
     }
 }
 
-
 export const initInfoRole = (game: TGameState) => {
     let murderPlayer = Math.floor(Math.random() * GLOBAL_PLAYERS)
     let roleArray: EPlayerRole[] = shuffleArray(Object.values(EPlayerRole).filter(r => r != EPlayerRole.MURDER));
