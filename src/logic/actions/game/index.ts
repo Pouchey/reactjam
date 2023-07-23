@@ -14,7 +14,7 @@ export const startGame = (game: TGameState) => {
 
 const initPosition = (game: TGameState) => {
   let end = false;
-  let tabPlayer = [...game.players];
+  const tabPlayer = [...game.players];
 
   // IDEE POUR OPTIMISER : On pourrait itérer sur les joueurs et leur donner une position aléatoire
   // Si la position est déjà prise, on reprend une position aléatoire

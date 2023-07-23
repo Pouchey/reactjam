@@ -1,4 +1,4 @@
 export type TPos = {
-    row: number,
-    col: number
-}
+  row: number;
+  col: number;
+};

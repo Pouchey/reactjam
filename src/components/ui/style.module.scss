@@ -1,0 +1,26 @@
+.uiwrapper{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.help{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.background{
+  position: absolute;
+  z-index: -1;
+  background: linear-gradient(to bottom, #8e2de2, #3701a3);
+  width: 100vw;
+  height: 100vh;
+}

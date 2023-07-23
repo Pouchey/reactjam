@@ -1,4 +1,7 @@
+import Button from '_components/button';
 import { useGameContext } from '_hooks/useGameContext';
+
+import styles from './style.module.scss';
 
 const Roles = () => {
   const gameContext = useGameContext();
@@ -19,7 +22,9 @@ const Roles = () => {
           </div>
         ))}
       </div>
-      <button onClick={handleStartGame}>Start Game</button>
+      <div className={styles.buttonwrapper}>
+        <Button onClick={handleStartGame}>START</Button>
+      </div>
     </div>
   );
 };

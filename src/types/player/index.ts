@@ -1,4 +1,5 @@
 import { TPos } from '_types/pos';
+
 import { EPlayerRole, EPlayerStatus } from './enum';
 
 export type TPlayer = {
