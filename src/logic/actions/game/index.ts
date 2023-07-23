@@ -8,14 +8,17 @@ export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
   initPosition(game);
-  // TODO : create a function to init the random roles
-  game.players = shuffleArray(game.players);
+  randomizePlayer(game);
   initFirstRound(game);
 
   game.status = EGameStatus.PLAYING;
 };
 
-export function RandomizePosition(): TPos {
+const randomizePlayer = (game: TGameState) => {
+  game.players = shuffleArray(game.players);
+}
+
+const randomizePosition = (): TPos => {
   return {
     col: Math.floor(Math.random() * COLS_SIZE),
     row: Math.floor(Math.random() * ROWS_SIZE),
@@ -27,9 +30,9 @@ const initPosition = (game: TGameState) => {
   // Il faudrait harmoniser les deux
 
   game.players.forEach((player) => {
-    let pos: TPos = RandomizePosition();
+    let pos: TPos = randomizePosition();
     while (game.board[pos.row][pos.col].hasPlayer) {
-      pos = RandomizePosition();
+      pos = randomizePosition();
     }
     game.board[pos.row][pos.col].hasPlayer = true;
     game.board[pos.row][pos.col].playerId = player.id;
