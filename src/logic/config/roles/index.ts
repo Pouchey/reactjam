@@ -6,7 +6,7 @@ import { shuffleArray } from "_utils/index";
 
 const getInfoRole = (role: EPlayerRole): TInfoRole => {
     console.log(role);
-
+    //TODO il faut definir les roles si néccessaire ajouter des attribut dans TInfoRole
     switch (role) {
         case EPlayerRole.MURDER:
             return {};

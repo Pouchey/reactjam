@@ -8,6 +8,7 @@ const actionCop = (game: TGameState, player: TPlayer) => {
 }
 
 export const playAction = (game: TGameState, player: TPlayer) => {
+    //TODO definir les actions en fonction du doc libre a toi de faire comme tu veux
     if (player !== undefined)
         switch (player.infoRole.role) {
             case EPlayerRole.COP:

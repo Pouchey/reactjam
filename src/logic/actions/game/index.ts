@@ -20,7 +20,19 @@ export const startGame = (game: TGameState) => {
 
 export const endRound = (game: TGameState) => {
   clearBoard(game);
+  refreshPlayer(game);
   gameOver(game);
+}
+
+const refreshPlayer = (game: TGameState) => {
+  const playerAlive = getPlayerAlive(game)
+  playerAlive.forEach(player => {
+    if (!player.isBot) {
+      player.ready = false;
+      player.vote = 0;
+      player.voteUse = false;
+    }
+  })
 }
 
 const randomizePlayer = (game: TGameState) => {
@@ -49,7 +61,8 @@ const initBots = (game: TGameState) => {
       isBot: true,
       infoRole: {},
       ready: true,
-      vote: 0
+      vote: 0,
+      voteUse: true,
     });
   }
 };
@@ -62,6 +75,7 @@ const initFirstRound = (game: TGameState) => {
     moveUsed: false,
   };
 };
+
 function gameOver(game: TGameState) {
   const playerAlive = getPlayerAlive(game);
   if (playerAlive.length == 2) {
@@ -89,7 +103,7 @@ function gameOver(game: TGameState) {
     })
     game.status = EGameStatus.FINISHED
   }
-}
+};
 
 function clearBoard(game: TGameState) {
   game.players.forEach(player => {
@@ -102,5 +116,5 @@ function clearBoard(game: TGameState) {
       player.ready = true;
     }
   })
-}
+};
 

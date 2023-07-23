@@ -9,5 +9,6 @@ export const createPlayer = (id: string): TPlayer => {
     infoRole: {},
     ready: false,
     vote: 0,
+    voteUse: false,
   };
 };

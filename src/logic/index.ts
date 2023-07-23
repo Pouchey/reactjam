@@ -1,5 +1,5 @@
 import { EGameStatus } from '_types/game/enum';
-import { startGame } from './actions/game';
+import { endRound, startGame } from './actions/game';
 import { playMeeting } from './actions/meeting';
 import { playRound } from './actions/round';
 import { getPossibleLocation } from './actions/round/move';
@@ -7,7 +7,7 @@ import { MAX_PLAYERS, MIN_PLAYERS } from './config';
 import { initGame } from './config/game';
 import { addNewPlayer, removePlayer } from './events/playerJoined';
 import { setReady } from './actions/round/ready';
-import { getPlayerAlive } from './actions/player';
+import { arrestedPlayer, getPlayerAlive } from './actions/player';
 
 Rune.initLogic({
   minPlayers: MIN_PLAYERS,
@@ -39,9 +39,17 @@ Rune.initLogic({
     },
   },
   update: ((game) => {
+    const playerAlive = getPlayerAlive(game.game)
     if (game.game.status === EGameStatus.RESULT) {
-      if (!getPlayerAlive(game.game).some(player => !player.ready)) {
+      if (!playerAlive.some(player => !player.ready)) {
         game.game.status = EGameStatus.PLAYING;
+      }
+    }
+    if (game.game.status === EGameStatus.MEETING) {
+      if (!playerAlive.some(player => !player.voteUse)) {
+        game.game.status = EGameStatus.RESULT;
+        arrestedPlayer(game.game);
+        endRound(game.game);
       }
     }
   })

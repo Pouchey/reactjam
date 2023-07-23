@@ -118,7 +118,8 @@ export const getPossibleLocation = (
     playerId: string,
     action: TRoundAction
 ): TPos[] => {
-    const player: TPlayer | undefined = game.players.find(
+    action;
+    const player = game.players.find(
         (player) => player.id === playerId
     );
     if (player !== undefined)
@@ -153,6 +154,9 @@ export const moveToCell = (game: TGameState, player: TPlayer, newPos: TPos) => {
             oldCell.playerId = undefined;
             newCell.hasPlayer = true;
             newCell.playerId = player.id;
+        } else {
+            throw new Error("player not have position");
+
         }
     } else throw new Error('new position not valid');
 };

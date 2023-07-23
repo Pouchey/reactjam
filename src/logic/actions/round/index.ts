@@ -5,11 +5,13 @@ import { moveToCell } from './move';
 import { TPlayer } from '_types/player';
 import { EGameStatus } from '_types/game/enum';
 import { playAction } from './action';
+import { getPlayerAlive } from '../player';
 
 
 const nextPlayer = (game: TGameState, prevPlayer: TPlayer) => {
-  const indexSuivant = game.players.indexOf(prevPlayer) + 1;
-  if (indexSuivant >= game.players.length) {
+  const playerAlive = getPlayerAlive(game)
+  const indexSuivant = playerAlive.indexOf(prevPlayer) + 1;
+  if (indexSuivant >= playerAlive.length) {
     game.status = EGameStatus.RESULT
   } else {
     const nextPlayer = game.players[indexSuivant]

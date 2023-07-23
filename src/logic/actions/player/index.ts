@@ -12,3 +12,12 @@ export const getRandomPlayerId = (game: TGameState) => {
 export const getPlayerAlive = (game: TGameState) => {
   return game.players.filter(player => player.status === EPlayerStatus.ALIVE);
 }
+
+export const arrestedPlayer = (game: TGameState) => {
+  const playerArrested = game.players.sort((playerA, playerB) => playerB.vote - playerA.vote).at(0);
+  if (playerArrested !== undefined) {
+    playerArrested.status = EPlayerStatus.ARRESTED;
+  } else {
+    throw new Error("No player un game");
+  }
+};

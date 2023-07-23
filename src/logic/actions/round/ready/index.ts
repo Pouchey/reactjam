@@ -5,5 +5,8 @@ export const setReady = (action: any, game: TGameState, playerId: string) => {
     const player = game.players.find(player => player.id === playerId)
     if (player !== undefined) {
         player.ready = true
+    } else {
+        throw new Error("player not exist");
+
     }
 }
