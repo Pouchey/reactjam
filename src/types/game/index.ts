@@ -34,6 +34,7 @@ export type TGameActions = {
   startGame: () => void;
   playRound: (action: TRoundAction) => void;
   playMeeting: (action: TMeetingAction) => void;
+  setReady: (action: any) => void,
   getPossibleLocation: (action: TRoundAction) => TPos[];
 };
 

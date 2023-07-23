@@ -1,4 +1,4 @@
-import { COLS_SIZE, GLOBAL_PLAYERS, ROWS_SIZE } from '_logic/config';
+import { GLOBAL_PLAYERS } from '_logic/config';
 import { initRoles } from '_logic/config/roles';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
@@ -6,6 +6,7 @@ import { TPlayer } from '_types/player';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 import { TPos } from '_types/pos';
 import { randomizePosition, shuffleArray } from '_utils/index';
+import { getPlayerAlive } from '../player';
 
 export const startGame = (game: TGameState) => {
   initBots(game);
@@ -16,6 +17,11 @@ export const startGame = (game: TGameState) => {
 
   game.status = EGameStatus.PLAYING;
 };
+
+export const endRound = (game: TGameState) => {
+  clearBoard(game);
+  gameOver(game);
+}
 
 const randomizePlayer = (game: TGameState) => {
   game.players = shuffleArray<TPlayer>(game.players);
@@ -42,6 +48,8 @@ const initBots = (game: TGameState) => {
       status: EPlayerStatus.ALIVE,
       isBot: true,
       infoRole: {},
+      ready: true,
+      vote: 0
     });
   }
 };
@@ -54,3 +62,45 @@ const initFirstRound = (game: TGameState) => {
     moveUsed: false,
   };
 };
+function gameOver(game: TGameState) {
+  const playerAlive = getPlayerAlive(game);
+  if (playerAlive.length == 2) {
+    const murder = playerAlive.find(player => player.infoRole.role === EPlayerRole.MURDER)
+    if (murder !== undefined) {
+      Rune.gameOver({
+        players: {
+          [murder.id]: 'WON'
+        }
+      })
+    }
+    game.status = EGameStatus.FINISHED
+  } else if (!playerAlive.some(player => player.infoRole.role === EPlayerRole.MURDER)) {
+    let players: {
+      [playerId: string]: number | "WON" | "LOST";
+    } = {}
+
+    playerAlive.forEach(player => {
+      players[player.id] = "WON";
+    });
+
+    Rune.gameOver({
+      players:
+        players
+    })
+    game.status = EGameStatus.FINISHED
+  }
+}
+
+function clearBoard(game: TGameState) {
+  game.players.forEach(player => {
+    if (player.status !== EPlayerStatus.ALIVE && player.currentPos !== undefined) {
+      game.board[player.currentPos.row][player.currentPos.col].hasPlayer = false;
+      game.board[player.currentPos.row][player.currentPos.col].playerId = undefined;
+
+      player.currentPos = undefined;
+      player.vote = 0;
+      player.ready = true;
+    }
+  })
+}
+

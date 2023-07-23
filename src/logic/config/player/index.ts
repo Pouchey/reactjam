@@ -7,5 +7,7 @@ export const createPlayer = (id: string): TPlayer => {
     status: EPlayerStatus.IDLE,
     isBot: false,
     infoRole: {},
+    ready: false,
+    vote: 0,
   };
 };

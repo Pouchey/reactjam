@@ -17,5 +17,6 @@ export type TPlayer = {
   currentPos?: TPos;
   isBot?: boolean;
   vote: number;
+  ready: boolean;
   infoRole: TInfoRole;
 };

@@ -8,3 +8,7 @@ export const getRandomPlayerId = (game: TGameState) => {
   const randomIndex = Math.floor(Math.random() * alivePlayers.length);
   return alivePlayers[randomIndex].id;
 };
+
+export const getPlayerAlive = (game: TGameState) => {
+  return game.players.filter(player => player.status === EPlayerStatus.ALIVE);
+}
