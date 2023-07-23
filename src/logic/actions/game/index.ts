@@ -1,4 +1,4 @@
-import { COLS_SIZE, ROWS_SIZE } from '_logic/config';
+import { COLS_SIZE, GLOBAL_PLAYERS, ROWS_SIZE } from '_logic/config';
 import { TGameState } from '_types/game';
 import { EGameStatus } from '_types/game/enum';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
@@ -8,7 +8,7 @@ export const startGame = (game: TGameState) => {
   initBots(game);
   initRoles(game);
   initPosition(game);
-  // TODO : Randomize players order
+  game.players = shuffleArray(game.players);
   initFirstRound(game);
 
   game.status = EGameStatus.PLAYING;
@@ -37,20 +37,21 @@ const initPosition = (game: TGameState) => {
 };
 
 const initBots = (game: TGameState) => {
-  const nbBots = 7 - game.players.length;
+  const nbBots = GLOBAL_PLAYERS - game.players.length;
 
   for (let i = 0; i < nbBots; i++) {
     game.players.push({
       id: `Bot ${i}`,
       status: EPlayerStatus.ALIVE,
       isBot: true,
+      infoRole: {}
     });
   }
 };
 
 const initRoles = (game: TGameState) => {
   game.players.forEach((player) => {
-    player.role = EPlayerRole.NEIGHBOR;
+    player.infoRole.role = EPlayerRole.NEIGHBOR;
     player.status = EPlayerStatus.ALIVE;
   });
 };
