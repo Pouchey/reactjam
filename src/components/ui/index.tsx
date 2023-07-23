@@ -8,7 +8,7 @@ const UIWrapper = ({ children }: Props) => {
   return (
     <div className={styles.uiwrapper}>
       <div className={styles.help}>Help ?</div>
-      {children}
+      <div className={styles.content}>{children}</div>
       <div className={styles.background} />
     </div>
   );

@@ -12,8 +12,8 @@ const Roles = () => {
 
   return (
     <div className={styles.start}>
-      <h1>Waiting for players</h1>
-      <h2>Players: {Object.keys(gameContext.players).length}</h2>
+      <h1>Waiting for players...</h1>
+      <h2>{Object.keys(gameContext.players).length} / 4</h2>
       <div className={styles.playerslist}>
         {Object.values(gameContext.players).map((player) => (
           <div key={player.playerId} className={styles.player}>
