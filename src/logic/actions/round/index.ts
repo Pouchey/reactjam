@@ -4,12 +4,13 @@ import { ERoundActionType } from '_types/round/enum';
 import { moveToCell } from './move';
 import { TPlayer } from '_types/player';
 import { EGameStatus } from '_types/game/enum';
+import { playAction } from './action';
 
 
 const nextPlayer = (game: TGameState, prevPlayer: TPlayer) => {
   const indexSuivant = game.players.indexOf(prevPlayer) + 1;
-  if (indexSuivant >= 7) {
-    game.status = EGameStatus.MEETING
+  if (indexSuivant >= game.players.length) {
+    game.status = EGameStatus.RESULT
   } else {
     const nextPlayer = game.players[indexSuivant]
     if (nextPlayer.infoRole.actionIsPassif !== undefined) {
@@ -40,6 +41,7 @@ export const playRound = (
         }
         break;
       case ERoundActionType.ACTION:
+        playAction(game, player)
         if (game.roundInfo !== undefined) {
           game.roundInfo.actionUsed = true;
         }
@@ -53,5 +55,7 @@ export const playRound = (
     if (game.roundInfo?.moveUsed && game.roundInfo.actionUsed) {
       nextPlayer(game, player);
     }
+  } else {
+    throw new Error("player not exist");
   }
 };

@@ -5,7 +5,7 @@ import { EGameStatus } from '_types/game/enum';
 import { TPlayer } from '_types/player';
 import { EPlayerRole, EPlayerStatus } from '_types/player/enum';
 import { TPos } from '_types/pos';
-import { shuffleArray } from '_utils/index';
+import { randomizePosition, shuffleArray } from '_utils/index';
 
 export const startGame = (game: TGameState) => {
   initBots(game);
@@ -19,13 +19,6 @@ export const startGame = (game: TGameState) => {
 
 const randomizePlayer = (game: TGameState) => {
   game.players = shuffleArray<TPlayer>(game.players);
-};
-
-const randomizePosition = (): TPos => {
-  return {
-    col: Math.floor(Math.random() * COLS_SIZE),
-    row: Math.floor(Math.random() * ROWS_SIZE),
-  };
 };
 
 const initPosition = (game: TGameState) => {

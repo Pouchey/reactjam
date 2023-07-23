@@ -24,6 +24,10 @@ export type TGameState = {
     actionUsed: boolean;
     moveUsed: boolean;
   };
+  roundMeetingInfo?: {
+    currentPlayerId: string | null;
+    startedAt: number;
+  }
 };
 
 export type TGameActions = {
