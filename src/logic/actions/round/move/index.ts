@@ -8,6 +8,18 @@ import { verifCell } from "_utils/index";
 const moveAllDirection = (game: TGameState, player: TPlayer): TPos[] => {
     let pos: TPos[] = []
     if (player.currentPos !== undefined) {
+        pos = pos.concat(move2D(game, player));
+        pos = pos.concat(moveDiagonal(game, player))
+    } else {
+        throw new Error("player not have position");
+    }
+    return pos
+}
+
+const move2D = (game: TGameState, player: TPlayer): TPos[] => {
+    let pos: TPos[] = []
+    if (player.currentPos !== undefined) {
+        //horizontal / vertical
         verifCell(game, { col: player.currentPos?.col - 1, row: player.currentPos?.row })
             && pos.push({ col: player.currentPos?.col - 1, row: player.currentPos?.row })
         verifCell(game, { col: player.currentPos?.col + 1, row: player.currentPos?.row })
@@ -16,6 +28,25 @@ const moveAllDirection = (game: TGameState, player: TPlayer): TPos[] => {
             && pos.push({ col: player.currentPos?.col, row: player.currentPos?.row - 1 })
         verifCell(game, { col: player.currentPos?.col, row: player.currentPos?.row + 1 })
             && pos.push({ col: player.currentPos?.col, row: player.currentPos?.row + 1 })
+    } else {
+        throw new Error("player not have position");
+    }
+    return pos
+}
+
+const moveDiagonal = (game: TGameState, player: TPlayer): TPos[] => {
+    let pos: TPos[] = []
+    if (player.currentPos !== undefined) {
+        //diagonale
+        verifCell(game, { col: player.currentPos?.col - 1, row: player.currentPos?.row + 1 })
+            && pos.push({ col: player.currentPos?.col - 1, row: player.currentPos?.row + 1 })
+        verifCell(game, { col: player.currentPos?.col + 1, row: player.currentPos?.row + 1 })
+            && pos.push({ col: player.currentPos?.col + 1, row: player.currentPos?.row + 1 })
+        verifCell(game, { col: player.currentPos?.col - 1, row: player.currentPos?.row - 1 })
+            && pos.push({ col: player.currentPos?.col - 1, row: player.currentPos?.row - 1 })
+        verifCell(game, { col: player.currentPos?.col + 1, row: player.currentPos?.row - 1 })
+            && pos.push({ col: player.currentPos?.col + 1, row: player.currentPos?.row - 1 })
+
     } else {
         throw new Error("player not have position");
     }
@@ -33,9 +64,9 @@ export function getPossibleLocation(
             case EPlayerRole.MURDER:
                 return moveAllDirection(game, player)
             case EPlayerRole.COP:
-                return []
+                return move2D(game, player)
             case EPlayerRole.CURIOUS:
-                return []
+                return moveDiagonal(game, player)
             case EPlayerRole.GOSSIP:
                 return []
             case EPlayerRole.LITTLE_GIRL:
