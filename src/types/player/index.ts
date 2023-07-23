@@ -7,6 +7,7 @@ export type TInfoRole = {
   role?: EPlayerRole;
   actionIsPassif?: boolean;
   actionCount?: number;
+  loverId?: string
 }
 
 export type TPlayer = {
